@@ -61,15 +61,10 @@
       width: 44px;
       height: 44px;
       border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: white;
-      letter-spacing: -1px;
+      overflow: hidden;
+      flex-shrink: 0;
     }
+    .owi-icon img { width: 100%; height: 100%; object-fit: cover; }
 
     .login-logo-text {
       font-size: 1.15rem;
@@ -226,14 +221,10 @@
       width: 28px;
       height: 28px;
       border-radius: 7px;
-      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: 900;
-      color: white;
+      overflow: hidden;
+      flex-shrink: 0;
     }
+    .nav-logo .owi-icon-sm img { width: 100%; height: 100%; object-fit: cover; }
 
     .nav-logo span { color: var(--accent-pink); }
 
@@ -389,15 +380,11 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      font-weight: 800;
-      color: white;
+      overflow: hidden;
       flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
     }
+    .bot-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
     .bot-info h3 { font-size: 0.95rem; font-weight: 700; }
     .bot-info p  { font-size: 0.75rem; color: var(--text-muted); }
@@ -439,7 +426,8 @@
       flex-shrink: 0;
     }
 
-    .msg-avatar.bot { background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); color: white; }
+    .msg-avatar.bot { background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); color: white; overflow: hidden; }
+    .msg-avatar.bot img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
     .msg-avatar.user-av { background: linear-gradient(135deg, #06b6d4, #3b82f6); color: white; }
 
     .bubble {
@@ -598,7 +586,7 @@
 <div id="login-page">
   <div class="login-card">
     <div class="login-logo">
-      <div class="owi-icon">OWI</div>
+      <div class="owi-icon"><img src="pulpito_6.png" alt="OWI" /></div>
       <div class="login-logo-text">Chat Platform <span>Omnicanal</span></div>
     </div>
 
@@ -640,7 +628,7 @@
     <div style="display:flex;align-items:center;gap:10px">
       <button class="menu-btn" id="menu-btn" onclick="toggleSidebar()">☰</button>
       <div class="nav-logo">
-        <div class="owi-icon-sm">OWI</div>
+        <div class="owi-icon-sm"><img src="pulpito_6.png" alt="OWI" /></div>
         <span class="logo-text">Chat Platform <span>Omnicanal</span></span>
       </div>
     </div>
@@ -683,7 +671,7 @@
 
     <div class="chat-area">
       <div class="chat-header">
-        <div class="bot-avatar">OWI</div>
+        <div class="bot-avatar"><img src="pulpito_6.png" alt="OWI" /></div>
         <div class="bot-info">
           <h3>OWI Bot</h3>
           <p id="chat-session-label">Sesión: A1</p>
@@ -832,7 +820,7 @@ function renderMessages() {
 
     const av = document.createElement('div');
     av.className = 'msg-avatar ' + (m.role === 'user' ? 'user-av' : 'bot');
-    av.textContent = m.role === 'user' ? 'Tú' : 'OWI';
+    if (m.role === 'user') { av.textContent = 'Tú'; } else { av.innerHTML = '<img src="pulpito_6.png" alt="OWI" />'; }
 
     const bwrap = document.createElement('div');
     const bubble = document.createElement('div');
@@ -857,7 +845,7 @@ function showTyping() {
   const wrap = document.getElementById('messages');
   const row = document.createElement('div');
   row.className = 'msg-row typing-indicator';
-  row.innerHTML = '<div class="msg-avatar bot">OWI</div><div class="bubble bot" style="padding:12px 16px"><div style="display:flex;gap:5px;align-items:center"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
+  row.innerHTML = '<div class="msg-avatar bot"><img src="pulpito_6.png" alt="OWI" /></div><div class="bubble bot" style="padding:12px 16px"><div style="display:flex;gap:5px;align-items:center"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
   wrap.appendChild(row);
   wrap.scrollTop = wrap.scrollHeight;
   return row;
