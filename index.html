@@ -444,6 +444,7 @@
 
     .bubble {
       max-width: 72%;
+      min-width: 80px;
       padding: 10px 14px;
       border-radius: 16px;
       font-size: 0.88rem;
@@ -581,7 +582,7 @@
       .chat-input-area { padding: 8px 12px; }
       .quick-replies { display: none; }
 
-      .bubble { max-width: 85%; font-size: 0.85rem; }
+      .bubble { max-width: 85%; min-width: 80px; font-size: 0.85rem; }
 
       .chat-textarea { font-size: 0.88rem; padding: 9px 14px; }
     }
@@ -889,10 +890,11 @@ async function sendMessage() {
     const data = await res.json();
     let reply = '';
     if (typeof data === 'string') reply = data;
+    else if (data.output && data.output.message) reply = data.output.message;
+    else if (data.output && typeof data.output === 'string') reply = data.output;
     else if (data.message) reply = data.message;
     else if (data.response) reply = data.response;
     else if (data.text) reply = data.text;
-    else if (data.output) reply = data.output;
     else if (data.content) reply = Array.isArray(data.content) ? data.content.map(c => c.text || '').join('\n') : data.content;
     else reply = JSON.stringify(data, null, 2);
     addMessage('bot', reply);
